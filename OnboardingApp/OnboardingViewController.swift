@@ -22,7 +22,7 @@ class OnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createData()
-//        collectionViewsetup()
+        collectionViewsetup()
     }
 
     
