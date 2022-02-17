@@ -16,6 +16,7 @@ class OnboardingViewController: UIViewController {
             configureButton()
         }
     }
+    @IBOutlet weak var skipButton: UIButton!
     
     var onboardingData: [OnboardingModel] = []
     
@@ -35,22 +36,22 @@ class OnboardingViewController: UIViewController {
     }
     
     func configureButton() {
-        nextButton.layer.cornerRadius = 15
+        nextButton.layer.cornerRadius = 20
         nextButton.backgroundColor = .orange
         nextButton.tintColor = .white
-        nextButton.layer.shadowColor = UIColor.gray.cgColor
-        nextButton.layer.shadowOpacity = 0.75
+        nextButton.layer.shadowOpacity = 0.25
         nextButton.layer.shadowOffset = .zero
-        nextButton.layer.shadowRadius = 5
-        nextButton.layer.shadowPath = UIBezierPath(roundedRect: nextButton.bounds, cornerRadius: nextButton.layer.cornerRadius).cgPath
+        nextButton.layer.shadowRadius = 2
     }
     
     @IBAction func nextClicked(_ sender: Any) {
     }
+    @IBAction func skipClicked(_ sender: Any) {
+    }
     
 }
 
-extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     private func collectionViewsetup() {
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -61,8 +62,13 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? OnboardingCollectionViewCell else { return UICollectionViewCell() }
+        cell.setupCell(onboardingData[indexPath.row])
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
 }
 
