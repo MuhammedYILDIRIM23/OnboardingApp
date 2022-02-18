@@ -18,9 +18,4 @@ class OnboardingCollectionViewCell: UICollectionViewCell {
         titleLabel.text = model.title
         detailLabel.text = model.detail
     }
-    
-    @IBAction func skipClicked(_ sender: Any) {
-    }
-    
-    
 }

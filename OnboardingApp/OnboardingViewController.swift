@@ -17,13 +17,25 @@ class OnboardingViewController: UIViewController {
         }
     }
     @IBOutlet weak var skipButton: UIButton!
+    @IBOutlet weak var pageControl: UIPageControl!
     
     var onboardingData: [OnboardingModel] = []
+    var currentPage: Int = 0 {
+        didSet {
+            pageControl.currentPage = currentPage
+            if currentPage == onboardingData.count - 1 {
+                nextButton.setTitle("Get Started", for: .normal)
+            } else {
+                nextButton.setTitle("Next", for: .normal)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         createData()
         collectionViewsetup()
+        pageControl.numberOfPages = onboardingData.count
     }
 
     
@@ -36,6 +48,7 @@ class OnboardingViewController: UIViewController {
     }
     
     func configureButton() {
+        nextButton.setTitle("Next", for: .normal)
         nextButton.layer.cornerRadius = 20
         nextButton.backgroundColor = .orange
         nextButton.tintColor = .white
@@ -45,8 +58,22 @@ class OnboardingViewController: UIViewController {
     }
     
     @IBAction func nextClicked(_ sender: Any) {
+        if currentPage == onboardingData.count - 1 {
+            let controller = storyboard?.instantiateViewController(withIdentifier: "HomeNC") as! UINavigationController
+            controller.modalPresentationStyle = .fullScreen
+            controller.modalTransitionStyle = .flipHorizontal 
+            present(controller, animated: true, completion: nil)
+        } else {
+            currentPage += 1
+            let indexPath = IndexPath(item: currentPage, section: 0)
+            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        }
+
     }
     @IBAction func skipClicked(_ sender: Any) {
+        currentPage = onboardingData.count - 1
+        let indexPath = IndexPath(item: currentPage, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
 }
@@ -68,7 +95,13 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height)
+    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let width = scrollView.frame.size.width
+        currentPage = Int(scrollView.contentOffset.x / width)
+        
+        
     }
 }
 
