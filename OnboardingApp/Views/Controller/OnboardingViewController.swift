@@ -59,9 +59,9 @@ class OnboardingViewController: UIViewController {
     
     @IBAction func nextClicked(_ sender: Any) {
         if currentPage == onboardingData.count - 1 {
-            let controller = storyboard?.instantiateViewController(withIdentifier: "HomeNC") as! UINavigationController // Welcome screene segue yaptık(farklı bir yöntem ile segue yaptık 'stroyboardId')
-            controller.modalPresentationStyle = .fullScreen // ekranın yarım gelmesinden dolayı ekranı fullscreen yapıyoru.
-            controller.modalTransitionStyle = .flipHorizontal // Login ekranına animasyonlu bağlanmamızı sağlıyor
+            let controller = storyboard?.instantiateViewController(withIdentifier: "HomeNC") as! UINavigationController
+            controller.modalPresentationStyle = .fullScreen
+            controller.modalTransitionStyle = .flipHorizontal
             present(controller, animated: true, completion: nil)
         } else {
             currentPage += 1
