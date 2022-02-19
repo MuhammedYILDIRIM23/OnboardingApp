@@ -11,34 +11,36 @@ class OnboardingViewController: UIViewController {
 
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var nextButton: UIButton! {
-        didSet {
-            configureButton()
-        }
-    }
+    @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var skipButton: UIButton!
     @IBOutlet weak var pageControl: UIPageControl!
-    
+
     var onboardingData: [OnboardingModel] = []
     var currentPage: Int = 0 {
         didSet {
             pageControl.currentPage = currentPage
             if currentPage == onboardingData.count - 1 {
                 nextButton.setTitle("Get Started", for: .normal)
+                skipButton.isHidden = true
             } else {
                 nextButton.setTitle("Next", for: .normal)
+                skipButton.isHidden = false
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createData()
         collectionViewsetup()
-        pageControl.numberOfPages = onboardingData.count
+        configureButton()
+        createData()
+        numberOfPages()
+        
     }
 
-    
+    private func numberOfPages() {
+        pageControl.numberOfPages = onboardingData.count
+    }
     
     private func createData() {
         onboardingData = [
@@ -52,16 +54,14 @@ class OnboardingViewController: UIViewController {
         nextButton.layer.cornerRadius = 20
         nextButton.backgroundColor = .orange
         nextButton.tintColor = .white
-        nextButton.layer.shadowOpacity = 0.25
-        nextButton.layer.shadowOffset = .zero
-        nextButton.layer.shadowRadius = 2
+  
     }
     
     @IBAction func nextClicked(_ sender: Any) {
         if currentPage == onboardingData.count - 1 {
-            let controller = storyboard?.instantiateViewController(withIdentifier: "HomeNC") as! UINavigationController
-            controller.modalPresentationStyle = .fullScreen
-            controller.modalTransitionStyle = .flipHorizontal 
+            let controller = storyboard?.instantiateViewController(withIdentifier: "HomeNC") as! UINavigationController // Welcome screene segue yaptık(farklı bir yöntem ile segue yaptık 'stroyboardId')
+            controller.modalPresentationStyle = .fullScreen // ekranın yarım gelmesinden dolayı ekranı fullscreen yapıyoru.
+            controller.modalTransitionStyle = .flipHorizontal // Login ekranına animasyonlu bağlanmamızı sağlıyor
             present(controller, animated: true, completion: nil)
         } else {
             currentPage += 1
@@ -75,7 +75,7 @@ class OnboardingViewController: UIViewController {
         let indexPath = IndexPath(item: currentPage, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
-    
+ 
 }
 
 extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -88,9 +88,8 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
         onboardingData.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? OnboardingCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OnboardingCollectionViewCell.cellIdentifier, for: indexPath) as? OnboardingCollectionViewCell else { return UICollectionViewCell() }
         cell.setupCell(onboardingData[indexPath.row])
-        
         return cell
     }
     

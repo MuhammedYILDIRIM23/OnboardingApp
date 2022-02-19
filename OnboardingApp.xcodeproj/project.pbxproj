@@ -66,15 +66,11 @@
 		27838DB027BD9102006DF3BB /* OnboardingApp */ = {
 			isa = PBXGroup;
 			children = (
+				27D9355627C1121C00872320 /* Delegates */,
+				27D9355427C1120B00872320 /* Model */,
+				27D9355527C1121500872320 /* Views */,
 				279DB48827BE552100323CA0 /* Font */,
-				27838DB127BD9102006DF3BB /* AppDelegate.swift */,
-				27838DB327BD9102006DF3BB /* SceneDelegate.swift */,
-				27838DB527BD9102006DF3BB /* OnboardingViewController.swift */,
-				27838DC727BD9525006DF3BB /* OnboardingCollectionViewCell.swift */,
-				27838DC527BD9119006DF3BB /* OnboardingModel.swift */,
-				27838DB727BD9102006DF3BB /* Main.storyboard */,
-				27838DBA27BD9107006DF3BB /* Assets.xcassets */,
-				27838DBC27BD9107006DF3BB /* LaunchScreen.storyboard */,
+				27D9355A27C1127900872320 /* Support */,
 				27838DBF27BD9107006DF3BB /* Info.plist */,
 			);
 			path = OnboardingApp;
@@ -88,6 +84,66 @@
 				279DB48B27BE554A00323CA0 /* Poppins-SemiBold.ttf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		27D9355427C1120B00872320 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				27838DC527BD9119006DF3BB /* OnboardingModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		27D9355527C1121500872320 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				27D9355827C1123700872320 /* Controller */,
+				27D9355927C1124400872320 /* Cell */,
+				27D9355727C1122200872320 /* Stroyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		27D9355627C1121C00872320 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				27838DB127BD9102006DF3BB /* AppDelegate.swift */,
+				27838DB327BD9102006DF3BB /* SceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		27D9355727C1122200872320 /* Stroyboard */ = {
+			isa = PBXGroup;
+			children = (
+				27838DB727BD9102006DF3BB /* Main.storyboard */,
+				27838DBC27BD9107006DF3BB /* LaunchScreen.storyboard */,
+			);
+			path = Stroyboard;
+			sourceTree = "<group>";
+		};
+		27D9355827C1123700872320 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				27838DB527BD9102006DF3BB /* OnboardingViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		27D9355927C1124400872320 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				27838DC727BD9525006DF3BB /* OnboardingCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		27D9355A27C1127900872320 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				27838DBA27BD9107006DF3BB /* Assets.xcassets */,
+			);
+			path = Support;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
