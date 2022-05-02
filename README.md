@@ -1,5 +1,5 @@
 ## OnboardingApp
-# Screenshots
+Screenshots
 <p float="left">
 <img width="200" alt="2021-07-20 at 12 41 50" src="https://user-images.githubusercontent.com/82177807/166188976-b5bfed42-238c-4529-81c6-1ef186c37266.png">
 <img width="200" alt="2021-07-20 at 12 41 50" src="https://user-images.githubusercontent.com/82177807/166189029-0ebd6527-f067-41b4-9521-167cefcccd5f.png">
